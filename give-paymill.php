@@ -19,9 +19,18 @@ if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 
 define( 'GIVE_PAYMILL_VERSION', '1.0' );
 
-if ( class_exists( 'Give_License' ) && is_admin() ) {
-	$give_stripe_license = new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
+
+/*--------------------------------------------------------------------------
+LICENSING / UPDATES
+--------------------------------------------------------------------------*/
+
+function give_add_paymill_licensing() {
+	if ( class_exists( 'Give_License' ) && is_admin() ) {
+		$give_stripe_license = new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
+	}
 }
+
+add_action( 'plugins_loaded', 'give_add_paymill_licensing' );
 
 
 /* ------------------------------------------------------------------------
@@ -53,7 +62,7 @@ add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
 
 // adds our ajax indicator and stripe payment error container
 function give_paymill_add_loader() {
-	echo '<div id="edd-paymill-ajax><img src="' . EDD_PLUGIN_URL . 'assets/images/loading.gif" class="edd-cart-ajax" style="display: none;"/></div>';
+	echo '<div id="edd-paymill-ajax><img src="' . GIVE_PLUGIN_URL . 'assets/images/loading.gif" class="edd-cart-ajax" style="display: none;"/></div>';
 	echo '<div id="edd-paymill-payment-errors"></div>';
 }
 
@@ -65,11 +74,11 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 	global $give_options;
 
 	if ( ! class_exists( 'Services_Paymill_Base' ) ) {
-		require_once EDD_PAYMILL_PLUGIN_DIR . '/Paymill/Transactions.php';
-		require_once EDD_PAYMILL_PLUGIN_DIR . '/Paymill/Clients.php';
-		require_once EDD_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
-		require_once EDD_PAYMILL_PLUGIN_DIR . '/Paymill/Offers.php';
-		require_once EDD_PAYMILL_PLUGIN_DIR . '/Paymill/Payments.php';
+		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Transactions.php';
+		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Clients.php';
+		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
+		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Offers.php';
+		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Payments.php';
 	}
 
 	// make sure we don't have any left over errors present
@@ -211,22 +220,22 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 				update_user_meta( $user->ID, '_paymill_sub_id', $subscription['id'] );
 
 				// Set user as subscriber
-				EDD_Recurring_Customer::set_as_subscriber( $user->ID );
+				Give_Recurring_Customer::set_as_subscriber( $user->ID );
 
 				// store the customer recurring ID
-				EDD_Recurring_Customer::set_customer_id( $user->ID, $customer_id );
+				Give_Recurring_Customer::set_customer_id( $user->ID, $customer_id );
 
 				// Set the customer status
-				EDD_Recurring_Customer::set_customer_status( $user->ID, 'active' );
+				Give_Recurring_Customer::set_customer_status( $user->ID, 'active' );
 
 				// Calculate the customer's new expiration date
-				$new_expiration = EDD_Recurring_Customer::calc_user_expiration( $user->ID, $payment );
+				$new_expiration = Give_Recurring_Customer::calc_user_expiration( $user->ID, $payment );
 
 				// Set the customer's new expiration date
-				EDD_Recurring_Customer::set_customer_expiration( $user->ID, $new_expiration );
+				Give_Recurring_Customer::set_customer_expiration( $user->ID, $new_expiration );
 
 				// Store the parent payment ID in the user meta
-				EDD_Recurring_Customer::set_customer_payment_id( $user->ID, $payment );
+				Give_Recurring_Customer::set_customer_payment_id( $user->ID, $payment );
 
 				$recurring_signup = true;
 
@@ -502,7 +511,7 @@ function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 	}
 
 	$cancel_url = wp_nonce_url( add_query_arg( array(
-		'give_action'  => 'cancel_recurring_paymill_customer',
+		'give_action' => 'cancel_recurring_paymill_customer',
 		'customer_id' => $customer_id,
 		'user_id'     => $user_id
 	) ), 'give_paymill_cancel' );
@@ -754,10 +763,6 @@ function give_paymill_js() {
 add_action( 'wp_enqueue_scripts', 'give_paymill_js', 100 );
 
 function give_paymill_public_key() {
-
-	if ( ! give_is_checkout() ) {
-		return;
-	}
 
 	global $give_options;
 
