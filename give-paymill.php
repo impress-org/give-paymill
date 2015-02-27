@@ -66,7 +66,7 @@ function give_paymill_add_loader() {
 	echo '<div id="give-paymill-payment-errors" class="give_error"></div>';
 }
 
-add_action( 'give_after_cc_fields', 'give_paymill_add_loader' );
+//add_action( 'give_after_cc_fields', 'give_paymill_add_loader' );
 
 // processes the payment
 function give_paymill_process_paymill_payment( $purchase_data ) {
