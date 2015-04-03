@@ -11,7 +11,7 @@ Paymill Gateway Add-on for Give
 
 == Description ==
 
-This plugin requires the Give plugin activated to function properly. When activated, it adds a payment gateway for Paymill.com.
+This plugin requires the Give plugin activated to function properly. When activated, it adds a payment gateway for Paymill.
 
 == Installation ==
 
