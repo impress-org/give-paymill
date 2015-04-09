@@ -3,7 +3,7 @@ Contributors: wordimpress, dlocc, webdevmattcrom
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 3.8
 Tested up to: 4.1.1
-Stable tag: 1.0
+Stable tag: 1.0.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
 
@@ -39,7 +39,9 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
-= 1.0 =
+= 1.0.1 =
+* Fix: Resolved PHP notices if the user enables the gateway but does not enter API keys
 
+= 1.0 =
 * Initial plugin release. Yippee!
 

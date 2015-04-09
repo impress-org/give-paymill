@@ -3,7 +3,7 @@
 Plugin Name: Give - Paymill Gateway
 Plugin URL: http://wordimpress.com/addons/paymill-gatways
 Description: Adds a payment gateway for Paymill.com
-Version: 1.0
+Version: 1.0.1
 Author: WordImpress
 Author URI: http://givewp.com
 Contributors: Pippin Williamson, Devin Walker, webdevmattcrom, mordauk
@@ -17,7 +17,7 @@ if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
-define( 'GIVE_PAYMILL_VERSION', '1.0' );
+define( 'GIVE_PAYMILL_VERSION', '1.0.1' );
 
 
 /*--------------------------------------------------------------------------
@@ -693,9 +693,9 @@ function give_paymill_js() {
 	$publishable_key = null;
 
 	if ( give_is_test_mode() ) {
-		$publishable_key = trim( $give_options['paymill_test_public_key'] );
+		$publishable_key = isset( $give_options['paymill_test_public_key'] ) ? trim( $give_options['paymill_test_public_key'] ) : '';
 	} else {
-		$publishable_key = trim( $give_options['paymill_live_public_key'] );
+		$publishable_key = isset( $give_options['paymill_live_public_key'] ) ? trim( $give_options['paymill_live_public_key'] ) : '';
 	}
 
 	wp_enqueue_script( 'paymill-js', 'https://bridge.paymill.com', array( 'jquery' ) );
@@ -705,8 +705,8 @@ function give_paymill_js() {
 	), GIVE_PAYMILL_VERSION );
 
 	$paymill_vars = array(
-		'is_ajaxed'  => give_is_ajax_enabled() ? 'true' : 'false',
-		'currency'   => strtoupper( $give_options['currency'] )
+		'is_ajaxed' => give_is_ajax_enabled() ? 'true' : 'false',
+		'currency'  => strtoupper( $give_options['currency'] )
 	);
 
 	wp_localize_script( 'give-paymill-js', 'give_paymill_vars', $paymill_vars );
@@ -720,9 +720,9 @@ function give_paymill_public_key() {
 	global $give_options;
 
 	if ( give_is_test_mode() ) {
-		$public_key = trim( $give_options['paymill_test_public_key'] );
+		$public_key = isset( $give_options['paymill_test_public_key'] ) ? trim( $give_options['paymill_test_public_key'] ) : '';
 	} else {
-		$public_key = trim( $give_options['paymill_live_public_key'] );
+		$public_key = isset( $give_options['paymill_live_public_key'] ) ? trim( $give_options['paymill_live_public_key'] ) : '';
 	}
 
 	echo '<script type="text/javascript">var PAYMILL_PUBLIC_KEY = "' . $public_key . '";</script>';
