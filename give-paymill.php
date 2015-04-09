@@ -652,7 +652,7 @@ function give_paymill_add_settings( $settings ) {
 		array(
 			'name' => '<strong>' . __( 'Paymill Settings', 'give_paymill' ) . '</strong>',
 			'desc' => '<hr>',
-			'id'   => 'give_title',
+			'id'   => 'give_title_authorize_net',
 			'type' => 'give_title'
 		),
 		array(
