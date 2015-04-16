@@ -705,7 +705,6 @@ function give_paymill_js() {
 	), GIVE_PAYMILL_VERSION );
 
 	$paymill_vars = array(
-		'is_ajaxed' => give_is_ajax_enabled() ? 'true' : 'false',
 		'currency'  => strtoupper( $give_options['currency'] )
 	);
 
