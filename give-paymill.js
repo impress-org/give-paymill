@@ -35,7 +35,7 @@ jQuery( document ).ready( function ( $ ) {
 			}
 
 			// show the errors on the form
-			jQuery(this_form ).find('.cc-address').after( '<div id="give-paymill-payment-errors" class="give_error">' + error.apierror + '</div>');
+			jQuery( this_form ).find( '.cc-address' ).after( '<div id="give-paymill-payment-errors" class="give_error">' + error.apierror + '</div>' );
 
 		} else {
 
@@ -62,7 +62,7 @@ jQuery( document ).ready( function ( $ ) {
 			exp_month : jQuery( this_form ).find( '.card-expiry-month' ).val(),
 			exp_year  : jQuery( this_form ).find( '.card-expiry-year' ).val(),
 			currency  : give_paymill_vars.currency,
-			amount_int: Number( jQuery( this_form ).find( '#give-amount' ).val() )
+			amount_int: Number( jQuery( this_form ).find( '#give-amount' ).val() * 100 )
 		}, give_paymill_response_handler );
 
 		return false; // submit from callback

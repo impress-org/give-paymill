@@ -3,7 +3,7 @@
 Plugin Name: Give - Paymill Gateway
 Plugin URL: http://wordimpress.com/addons/paymill-gatways
 Description: Adds a payment gateway for Paymill.com
-Version: 1.0.1
+Version: 1.0.2
 Author: WordImpress
 Author URI: http://givewp.com
 Contributors: Pippin Williamson, Devin Walker, webdevmattcrom, mordauk
@@ -17,7 +17,7 @@ if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
 
-define( 'GIVE_PAYMILL_VERSION', '1.0.1' );
+define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
 
 
 /*--------------------------------------------------------------------------
@@ -26,7 +26,7 @@ LICENSING / UPDATES
 
 function give_add_paymill_licensing() {
 	if ( class_exists( 'Give_License' ) && is_admin() ) {
-		$give_stripe_license = new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
+		$give_paymill_license = new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
 	}
 }
 
@@ -56,17 +56,10 @@ function give_paymill_register_gateway( $gateways ) {
 	$gateways['paymill'] = array( 'admin_label' => 'Paymill', 'checkout_label' => __( 'Credit Card', 'give_paymill' ) );
 
 	return $gateways;
+
 }
 
 add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
-
-// adds our ajax indicator and payment error container
-function give_paymill_add_loader() {
-	echo '<div id="give-paymill-ajax><img src="' . GIVE_PLUGIN_URL . 'assets/images/spinner.gif" class="give-cart-ajax" style="display: none;"/></div>';
-	echo '<div id="give-paymill-payment-errors" class="give_error"></div>';
-}
-
-//add_action( 'give_after_cc_fields', 'give_paymill_add_loader' );
 
 // processes the payment
 function give_paymill_process_paymill_payment( $purchase_data ) {
@@ -144,12 +137,11 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 				'date'            => $purchase_data['date'],
 				'user_email'      => $purchase_data['user_email'],
 				'purchase_key'    => $purchase_data['purchase_key'],
-				'currency'        => give_get_currency(),
+				'currency'        => strtolower( $give_options['currency'] ),
 				'user_info'       => $purchase_data['user_info'],
 				'gateway'         => 'paymill',
 				'status'          => 'pending'
 			);
-
 
 			if ( give_paymill_is_recurring_purchase( $purchase_data ) && ( ! empty( $customer ) || $customer_exists ) ) {
 
@@ -205,6 +197,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 			} elseif ( ! empty( $customer ) || $customer_exists ) {
 
 				// Process a normal one-time charge purchase
+
 				$transaction_params = array(
 					'amount'      => $purchase_data['price'] * 100, // amount in cents
 					'currency'    => strtoupper( $give_options['currency'] ),
@@ -594,7 +587,7 @@ function give_paymill_event_listener() {
 				// retrieve the customer who made this payment (only for subscriptions)
 				$user_id = Give_Recurring_Customer::get_user_id_by_customer_id( $subscription->client );
 
-				// check to confirm this is a stripe subscriber
+				// check to confirm this is a paymill subscriber
 				if ( $user_id ) {
 
 					// Retrieve the original payment details
@@ -705,7 +698,7 @@ function give_paymill_js() {
 	), GIVE_PAYMILL_VERSION );
 
 	$paymill_vars = array(
-		'currency'  => strtoupper( $give_options['currency'] )
+		'currency' => strtoupper( $give_options['currency'] )
 	);
 
 	wp_localize_script( 'give-paymill-js', 'give_paymill_vars', $paymill_vars );
