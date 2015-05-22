@@ -3,10 +3,10 @@
 Plugin Name: Give - Paymill Gateway
 Plugin URL: http://wordimpress.com/addons/paymill-gatways
 Description: Adds a payment gateway for Paymill.com
-Version: 1.0.2
+Version: 1.1
 Author: WordImpress
 Author URI: http://givewp.com
-Contributors: Pippin Williamson, Devin Walker, webdevmattcrom, mordauk
+Contributors: Devin Walker, webdevmattcrom, mordauk, Pippin Williamson
 */
 
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
@@ -231,7 +231,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			} else {
 
-				give_record_gateway_error( __( 'Paymill Error', 'edd' ), sprintf( __( 'Payment creation failed or payment not verified. Transaction details: ', 'edd' ), json_encode( $transaction ) ) );
+				give_record_gateway_error( __( 'Paymill Error', 'give' ), sprintf( __( 'Payment creation failed or payment not verified. Transaction details: ', 'give' ), json_encode( $transaction ) ) );
 				give_set_error( 'payment_not_recorded', __( 'Your payment could not be recorded, please contact the site administrator.', 'give_paymill' ) );
 				// if errors are present, send the user back to the purchase page so they can be corrected
 				give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
@@ -240,7 +240,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 		}
 		catch ( Exception $e ) {
-			give_record_gateway_error( __( 'Paymill Error', 'edd' ), sprintf( __( 'There was an error encountered while processing the payment. Error details: ', 'edd' ), json_encode( $e ) ) );
+			give_record_gateway_error( __( 'Paymill Error', 'give' ), sprintf( __( 'There was an error encountered while processing the payment. Error details: ', 'give' ), json_encode( $e ) ) );
 			give_set_error( 'payment_error', __( 'There was an error processing your payment, please ensure you have entered your card number correctly.', 'give_paymill' ) );
 			give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
 		}
@@ -253,36 +253,37 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
 
 
 /**
- * Create recurring payment plans when Give Forms are saved
+ * Create Recurring Paymill Plans
  *
- * This is in order to support the Recurring Payments module
+ * @description Create recurring payment plans when Give Forms are saved; This is in order to support the Recurring Payments module
  *
  * @access      public
  * @since       1.0
  * @return      int
  */
 
-function give_paymill_create_recurring_plans( $post_id = 0 ) {
+function give_paymill_create_recurring_plans( $form_id = 0 ) {
 	global $give_options, $post;
 
+	//Safeguards
 	if ( ! class_exists( 'Give_Recurring' ) ) {
-		return $post_id;
+		return $form_id;
 	}
 
 	if ( ( defined( 'DOING_AUTOSAVE' ) && DOING_AUTOSAVE ) || ( defined( 'DOING_AJAX' ) && DOING_AJAX ) || isset( $_REQUEST['bulk_edit'] ) ) {
-		return $post_id;
+		return $form_id;
 	}
 
 	if ( isset( $post->post_type ) && $post->post_type == 'revision' ) {
-		return $post_id;
+		return $form_id;
 	}
 
 	if ( ! isset( $post->post_type ) || $post->post_type != 'give_forms' ) {
-		return $post_id;
+		return $form_id;
 	}
 
-	if ( ! current_user_can( 'edit_product', $post_id ) ) {
-		return $post_id;
+	if ( ! current_user_can( 'edit_product', $form_id ) ) {
+		return $form_id;
 	}
 
 	if ( ! class_exists( 'Services_Paymill_Base' ) ) {
@@ -306,26 +307,29 @@ function give_paymill_create_recurring_plans( $post_id = 0 ) {
 
 		$offers = new Services_Paymill_Offers( $apiKey, $apiEndpoint );
 
-		if ( give_has_variable_prices( $post_id ) ) {
+		if ( give_has_variable_prices( $form_id ) ) {
 
-			$prices = give_get_variable_prices( $post_id );
-			foreach ( $prices as $price_id => $price ) {
+			$prices = give_get_variable_prices( $form_id );
 
-				if ( Give_Recurring()->is_price_recurring( $post_id, $price_id ) ) {
+			foreach ( $prices as $price ) {
 
-					$period = Give_Recurring()->get_period( $price_id, $post_id );
+				$price_id = $price['_give_id']['level_id'];
+
+				if ( Give_Recurring()->is_recurring( $form_id, $price_id ) ) {
+
+					$period = Give_Recurring()->get_period( $price_id, $form_id );
 
 					if ( $period == 'day' ) {
 						wp_die( __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
 					}
 
-					if ( Give_Recurring()->get_times( $price_id, $post_id ) > 0 ) {
+					if ( Give_Recurring()->get_times( $price_id, $form_id ) > 0 ) {
 						wp_die( __( 'Paymill requires that the Times option be set to 0.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
 					}
 
 					$plans[] = array(
-						'name'     => sanitize_key( $price['name'] ),
-						'price'    => $price['amount'],
+						'name'     => sanitize_key( $price['_give_text'] ),
+						'price'    => $price['_give_amount'],
 						'period'   => $period,
 						'price_id' => $price_id
 					);
@@ -335,21 +339,21 @@ function give_paymill_create_recurring_plans( $post_id = 0 ) {
 
 		} else {
 
-			if ( Give_Recurring()->is_recurring( $post_id ) ) {
+			if ( Give_Recurring()->is_recurring( $form_id ) ) {
 
-				$period = Give_Recurring()->get_period_single( $post_id );
+				$period = $period = Give_Recurring()->get_period( 0, $form_id );
 
 				if ( $period == 'day' ) {
 					wp_die( __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
 				}
 
-				if ( Give_Recurring()->get_times_single( $post_id ) > 0 ) {
+				if ( Give_Recurring()->get_times( 0, $form_id ) > 0 ) {
 					wp_die( __( 'Paymill requires that the Times option be set to 0.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
 				}
 
 				$plans[] = array(
-					'name'   => sanitize_key( get_post_field( 'post_name', $post_id ) ),
-					'price'  => give_get_form_price( $post_id ),
+					'name'   => sanitize_key( get_post_field( 'post_name', $form_id ) ),
+					'price'  => give_get_form_price( $form_id ),
 					'period' => $period
 				);
 			}
@@ -357,12 +361,12 @@ function give_paymill_create_recurring_plans( $post_id = 0 ) {
 
 		// Get all plans so we know which ones already exist
 		$all_plans = $offers->get();
-		$all_plans = wp_list_pluck( $all_plans, "name" );
+		$all_plans = wp_list_pluck( $all_plans, 'name' );
 
 		foreach ( $plans as $plan ) {
 
 			// Create the plan ID
-			$plan_id = $post_id . '_' . $plan['name'];
+			$plan_id = $form_id . '_' . $plan['name'];
 			$plan_id = apply_filters( 'give_paymill_recurring_plan_id', $plan_id, $plan );
 
 			if ( in_array( $plan_id, $all_plans ) ) {
@@ -378,14 +382,19 @@ function give_paymill_create_recurring_plans( $post_id = 0 ) {
 
 			$offer = $offers->create( $params );
 
-			if ( give_has_variable_prices( $post_id ) ) {
-				foreach ( $prices as $price_id => $price ) {
-					if ( $plan_id == $post_id . '_' . sanitize_key( $price['name'] ) ) {
-						update_post_meta( $post_id, '_paymill_offer_id_price_' . (int) $price_id, $offer['id'] );
+			if ( give_has_variable_prices( $form_id ) ) {
+
+				$prices = give_get_variable_prices( $form_id );
+
+				foreach ( $prices as $price ) {
+					$price_id = $price['_give_id']['level_id'];
+
+					if ( $plan_id == $form_id . '_' . sanitize_key( $price['_give_text'] ) ) {
+						update_post_meta( $form_id, '_paymill_offer_id_price_' . (int) $price_id, $offer['id'] );
 					}
 				}
 			} else {
-				update_post_meta( $post_id, '_paymill_offer_id', $offer['id'] );
+				update_post_meta( $form_id, '_paymill_offer_id', $offer['id'] );
 			}
 
 		}
@@ -402,7 +411,7 @@ add_action( 'save_post', 'give_paymill_create_recurring_plans', 999 );
  * Detect if the current purchase is for a recurring product
  *
  * @access      public
- * @since       1.5
+ * @since       1.1
  * @return      bool
  */
 
@@ -429,21 +438,23 @@ function give_paymill_is_recurring_purchase( $purchase_data ) {
  */
 
 function give_paymill_get_plan_id( $purchase_data ) {
-	foreach ( $purchase_data['downloads'] as $download ) {
 
-		if ( give_has_variable_prices( $download['id'] ) ) {
+	$form_id  = $purchase_data['post_data']['give-form-id'];
+	$price_id = ( isset( $purchase_data['post_data']['give-price-id'] ) ? $purchase_data['post_data']['give-price-id'] : 0 );
 
-			$prices  = give_get_variable_prices( $download['id'] );
-			$plan_id = get_post_meta( $download['id'], '_paymill_offer_id_price_' . (int) $download['options']['price_id'], true );
+	if ( give_has_variable_prices( $form_id ) ) {
 
-		} else {
+		$plan_id = get_post_meta( $form_id, '_paymill_offer_id_price_' . (int) $price_id, true );
 
-			$plan_id = get_post_meta( $download['id'], '_paymill_offer_id', true );
+	} else {
 
-		}
+		$plan_id = get_post_meta( $form_id, '_paymill_offer_id', true );
 
-		return $plan_id;
 	}
+	$post_meta = get_post_meta( $form_id );
+
+	return $plan_id;
+
 }
 
 
@@ -454,7 +465,6 @@ function give_paymill_get_plan_id( $purchase_data ) {
  * @since       1.0
  * @return      string
  */
-
 function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 
 	$customer_id = get_user_meta( $user_id, '_paymill_sub_id', true );
@@ -477,7 +487,7 @@ function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 		empty( $atts['text'] ) ? __( 'Cancel Subscription', 'give-recurring' ) : esc_html( $atts['text'] )
 	);
 
-	$link .= '<script type="text/javascript">jQuery(document).ready(function($) {$(".give-recurring-cancel").on("click", function() { if(confirm("' . __( "Do you really want to cancel your subscription? You will retain access for the length of time you have paid for.", "give_paymill" ) . '")) {return true;}return false;});});</script>';
+	$link .= '<script type="text/javascript">jQuery(document).ready(function($) {$(".give-recurring-cancel").on("click", function() { if(confirm("' . __( "Do you really want to cancel your subscription?", "give_paymill" ) . '")) {return true;}return false;});});</script>';
 
 	return $link;
 
@@ -580,7 +590,6 @@ function give_paymill_event_listener() {
 			case 'subscription.succeeded' :
 
 				// Process a subscription payment
-
 				$subscription = $event->event_resource->subscription;
 				$transaction  = $event->event_resource->transaction;
 
@@ -613,7 +622,6 @@ function give_paymill_event_listener() {
 			case 'subscription.deleted' :
 
 				// Process a cancellation
-
 				$subscription = $event->event_resource->subscription;
 
 				// retrieve the customer who made this payment (only for subscriptions)
@@ -679,7 +687,12 @@ function give_paymill_add_settings( $settings ) {
 
 add_filter( 'give_settings_gateways', 'give_paymill_add_settings' );
 
-
+/**
+ * Frontend Scripts
+ *
+ * @description Enqueue the scripts to the frontend of the website
+ *
+ */
 function give_paymill_js() {
 	global $give_options;
 
@@ -706,6 +719,36 @@ function give_paymill_js() {
 }
 
 add_action( 'wp_enqueue_scripts', 'give_paymill_js', 100 );
+
+
+/**
+ *
+ * Frontend Scripts
+ *
+ * @description Enqueue the scripts to the frontend of the website
+ *
+ * @param $hook
+ */
+function give_paymill_admin_js( $hook ) {
+
+	global $post_type;
+
+	if ( $post_type !== 'give_forms' ) {
+		return;
+	}
+
+	wp_enqueue_script( 'give-paymill-admin-forms-js', GIVE_PAYMILL_PLUGIN_URL . 'assets/js/give-paymill-admin.js', 'jquery', GIVE_PAYMILL_VERSION );
+	//Localize strings & variables for JS
+	wp_localize_script( 'give-paymill-admin-forms-js', 'give_admin_paymill_vars', array(
+		'give_version'   => GIVE_VERSION,
+		'invalid_time'   => __( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ),
+		'invalid_period' => __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' )
+	) );
+
+}
+
+add_action( 'admin_enqueue_scripts', 'give_paymill_admin_js' );
+
 
 function give_paymill_public_key() {
 
