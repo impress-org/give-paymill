@@ -711,7 +711,7 @@ function give_paymill_js() {
 	), GIVE_PAYMILL_VERSION );
 
 	$paymill_vars = array(
-		'currency' => strtoupper( $give_options['currency'] )
+		'currency' => give_get_currency()
 	);
 
 	wp_localize_script( 'give-paymill-js', 'give_paymill_vars', $paymill_vars );
