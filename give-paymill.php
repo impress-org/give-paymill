@@ -137,7 +137,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 				'date'            => $purchase_data['date'],
 				'user_email'      => $purchase_data['user_email'],
 				'purchase_key'    => $purchase_data['purchase_key'],
-				'currency'        => strtolower( $give_options['currency'] ),
+				'currency'        => give_get_currency(),
 				'user_info'       => $purchase_data['user_info'],
 				'gateway'         => 'paymill',
 				'status'          => 'pending'
@@ -200,7 +200,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 				$transaction_params = array(
 					'amount'      => $purchase_data['price'] * 100, // amount in cents
-					'currency'    => strtoupper( $give_options['currency'] ),
+					'currency'    => give_get_currency(),
 					'token'       => sanitize_text_field( $_POST['paymillToken'] ),
 					'client'      => $customer_id,
 					'description' => give_get_purchase_summary( $purchase_data )
@@ -375,7 +375,7 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 
 			$params = array(
 				'amount'   => $plan['price'] * 100,
-				'currency' => strtoupper( $give_options['currency'] ),
+				'currency' => give_get_currency(),
 				'interval' => '1 ' . strtoupper( $plan['period'] ),
 				'name'     => $plan_id
 			);
