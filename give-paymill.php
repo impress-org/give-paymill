@@ -25,7 +25,7 @@ LICENSING / UPDATES
 --------------------------------------------------------------------------*/
 
 function give_add_paymill_licensing() {
-	if ( class_exists( 'Give_License' ) && is_admin() ) {
+	if ( class_exists( 'Give_License' ) ) {
 		new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
 	}
 }
