@@ -660,26 +660,26 @@ function give_paymill_add_settings( $settings ) {
 		),
 		array(
 			'name' => esc_html__( 'Live Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live API key, found in your Paymill Account Settings', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your live API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'id'   => 'paymill_live_key',
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_live_public_key',
 			'name' => esc_html__( 'Live Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live public API key, found in your Paymill Account Settings', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your live public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_test_key',
 			'name' => esc_html__( 'Test Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test API key, found in your Paymill Account Settings', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your test API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_test_public_key',
 			'name' => esc_html__( 'Test Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test public API key, found in your Paymill Account Settings', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your test public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		)
 	);
