@@ -66,7 +66,7 @@ add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
 // processes the payment
 function give_paymill_process_paymill_payment( $purchase_data ) {
 
-	global $give_options;
+	$give_options = give_get_settings();
 
 	if ( ! class_exists( 'Services_Paymill_Base' ) ) {
 		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Transactions.php';
@@ -265,7 +265,9 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
  */
 
 function give_paymill_create_recurring_plans( $form_id = 0 ) {
-	global $give_options, $post;
+	global $post;
+
+	$give_options = give_get_settings();
 
 	//Safeguards
 	if ( ! class_exists( 'Give_Recurring' ) ) {
@@ -509,7 +511,7 @@ add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 
 function give_paymill_cancel_subscription( $data ) {
 	if ( wp_verify_nonce( $data['_wpnonce'], 'give_paymill_cancel' ) ) {
 
-		global $give_options;
+		$give_options = give_get_settings();
 
 		if ( ! class_exists( 'Services_Paymill_Subscriptions' ) ) {
 			require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
@@ -567,7 +569,7 @@ function give_paymill_event_listener() {
 
 	if ( isset( $_GET['give-listener'] ) && $_GET['give-listener'] == 'paymill' ) {
 
-		global $give_options;
+		$give_options = give_get_settings();
 
 		if ( ! class_exists( 'Services_Paymill_Subscriptions' ) ) {
 			require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
@@ -696,7 +698,7 @@ add_filter( 'give_settings_gateways', 'give_paymill_add_settings' );
  *
  */
 function give_paymill_js() {
-	global $give_options;
+	$give_options = give_get_settings();
 
 	$publishable_key = null;
 
@@ -754,7 +756,7 @@ add_action( 'admin_enqueue_scripts', 'give_paymill_admin_js' );
 
 function give_paymill_public_key() {
 
-	global $give_options;
+	$give_options = give_get_settings();
 
 	if ( give_is_test_mode() ) {
 		$public_key = isset( $give_options['paymill_test_public_key'] ) ? trim( $give_options['paymill_test_public_key'] ) : '';
