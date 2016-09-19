@@ -233,7 +233,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			} else {
 
-				give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'Payment creation failed or payment not verified. Transaction details: ', 'give-paymill' ), json_encode( $transaction ) ) );
+				give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'Payment creation failed or payment not verified. Details: %s', 'give-paymill' ), json_encode( $transaction ) ) );
 				give_set_error( 'payment_not_recorded', esc_html__( 'Your payment could not be recorded, please contact the site administrator.', 'give-paymill' ) );
 				// if errors are present, send the user back to the purchase page so they can be corrected
 				give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
@@ -242,7 +242,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 		}
 		catch ( Exception $e ) {
-			give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'There was an error encountered while processing the payment. Error details: ', 'give-paymill' ), json_encode( $e ) ) );
+			give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'There was an error encountered while processing the payment. Details: %s', 'give-paymill' ), json_encode( $e ) ) );
 			give_set_error( 'payment_error', esc_html__( 'There was an error processing your payment, please ensure you have entered your card number correctly.', 'give-paymill' ) );
 			give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
 		}
