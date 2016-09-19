@@ -6,6 +6,8 @@ Description: Adds a payment gateway for Paymill.com
 Version: 1.1
 Author: WordImpress
 Author URI: http://givewp.com
+Text Domain: give-paymill
+Domain Path: /languages
 Contributors: Devin Walker, webdevmattcrom, mordauk, Pippin Williamson
 */
 
@@ -44,7 +46,7 @@ function give_paymill_textdomain() {
 	$give_lang_dir = apply_filters( 'give_paymill_languages_directory', $give_lang_dir );
 
 	// Load the translations
-	load_plugin_textdomain( 'give_paymill', false, $give_lang_dir );
+	load_plugin_textdomain( 'give-paymill', false, $give_lang_dir );
 }
 
 add_action( 'init', 'give_paymill_textdomain' );
@@ -53,7 +55,7 @@ add_action( 'init', 'give_paymill_textdomain' );
 // registers the gateway
 function give_paymill_register_gateway( $gateways ) {
 	// Format: ID => Name
-	$gateways['paymill'] = array( 'admin_label' => 'Paymill', 'checkout_label' => __( 'Credit Card', 'give_paymill' ) );
+	$gateways['paymill'] = array( 'admin_label' => 'Paymill', 'checkout_label' => esc_html__( 'Credit Card', 'give-paymill' ) );
 
 	return $gateways;
 
@@ -64,7 +66,7 @@ add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
 // processes the payment
 function give_paymill_process_paymill_payment( $purchase_data ) {
 
-	global $give_options;
+	$give_options = give_get_settings();
 
 	if ( ! class_exists( 'Services_Paymill_Base' ) ) {
 		require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Transactions.php';
@@ -79,7 +81,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 	if ( ! isset( $_POST['paymillToken'] ) ) {
 		// no token
-		give_set_error( 'no_paymill_token', __( 'Missing token. Please contact support.', 'give_paymill' ) );
+		give_set_error( 'no_paymill_token', esc_html__( 'Missing token. Please contact support.', 'give-paymill' ) );
 	}
 
 	$errors = give_get_errors();
@@ -165,7 +167,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 				// If there is an error creating the subscription, return to checkout
 				if ( ! empty( $subscription['error'] ) ) {
-					give_set_error( 'paymill_error', sprintf( __( 'Merchant Error: %s', 'give_paymill' ), $subscription['error'] ) );
+					give_set_error( 'paymill_error', sprintf( esc_html__( 'Merchant Error: %s', 'give-paymill' ), $subscription['error'] ) );
 					give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
 				}
 
@@ -213,7 +215,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			} else {
 
-				give_record_gateway_error( __( 'Customer Creation Failed', 'give_paymill' ), sprintf( __( 'Customer creation failed while processing a payment. Payment Data: %s', ' give_paymill' ), json_encode( $payment_data ) ), $payment );
+				give_record_gateway_error( esc_html__( 'Customer Creation Failed', 'give-paymill' ), sprintf( esc_html__( 'Customer creation failed while processing a payment. Payment Data: %s', 'give-paymill' ), json_encode( $payment_data ) ), $payment );
 
 			}
 
@@ -231,8 +233,8 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			} else {
 
-				give_record_gateway_error( __( 'Paymill Error', 'give' ), sprintf( __( 'Payment creation failed or payment not verified. Transaction details: ', 'give' ), json_encode( $transaction ) ) );
-				give_set_error( 'payment_not_recorded', __( 'Your payment could not be recorded, please contact the site administrator.', 'give_paymill' ) );
+				give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'Payment creation failed or payment not verified. Details: %s', 'give-paymill' ), json_encode( $transaction ) ) );
+				give_set_error( 'payment_not_recorded', esc_html__( 'Your payment could not be recorded, please contact the site administrator.', 'give-paymill' ) );
 				// if errors are present, send the user back to the purchase page so they can be corrected
 				give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
 
@@ -240,8 +242,8 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 		}
 		catch ( Exception $e ) {
-			give_record_gateway_error( __( 'Paymill Error', 'give' ), sprintf( __( 'There was an error encountered while processing the payment. Error details: ', 'give' ), json_encode( $e ) ) );
-			give_set_error( 'payment_error', __( 'There was an error processing your payment, please ensure you have entered your card number correctly.', 'give_paymill' ) );
+			give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'There was an error encountered while processing the payment. Details: %s', 'give-paymill' ), json_encode( $e ) ) );
+			give_set_error( 'payment_error', esc_html__( 'There was an error processing your payment, please ensure you have entered your card number correctly.', 'give-paymill' ) );
 			give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
 		}
 	} else {
@@ -263,7 +265,9 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
  */
 
 function give_paymill_create_recurring_plans( $form_id = 0 ) {
-	global $give_options, $post;
+	global $post;
+
+	$give_options = give_get_settings();
 
 	//Safeguards
 	if ( ! class_exists( 'Give_Recurring' ) ) {
@@ -320,11 +324,11 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 					$period = Give_Recurring()->get_period( $price_id, $form_id );
 
 					if ( $period == 'day' ) {
-						wp_die( __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
+						wp_die( esc_html__( 'Paymill only permits yearly, monthly, and weekly plans.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 					}
 
 					if ( Give_Recurring()->get_times( $price_id, $form_id ) > 0 ) {
-						wp_die( __( 'Paymill requires that the Times option be set to 0.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
+						wp_die( esc_html__( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 					}
 
 					$plans[] = array(
@@ -344,11 +348,11 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 				$period = $period = Give_Recurring()->get_period( 0, $form_id );
 
 				if ( $period == 'day' ) {
-					wp_die( __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
+					wp_die( esc_html__( 'Paymill only permits yearly, monthly, and weekly plans.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 				}
 
 				if ( Give_Recurring()->get_times( 0, $form_id ) > 0 ) {
-					wp_die( __( 'Paymill requires that the Times option be set to 0.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
+					wp_die( esc_html__( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 				}
 
 				$plans[] = array(
@@ -400,7 +404,7 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 		}
 	}
 	catch ( Exception $e ) {
-		wp_die( __( 'There was an error creating a payment plan with Paymill.', 'give_paymill' ), __( 'Error', 'give_paymill' ) );
+		wp_die( esc_html__( 'There was an error creating a payment plan with Paymill.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 	}
 }
 
@@ -483,11 +487,11 @@ function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 	$link       = sprintf(
 		$link,
 		$cancel_url,
-		__( 'Cancel your subscription', 'give-recurring' ),
-		empty( $atts['text'] ) ? __( 'Cancel Subscription', 'give-recurring' ) : esc_html( $atts['text'] )
+		__( 'Cancel your subscription', 'give-paymill' ),
+		empty( $atts['text'] ) ? esc_html__( 'Cancel Subscription', 'give-paymill' ) : esc_html( $atts['text'] )
 	);
 
-	$link .= '<script type="text/javascript">jQuery(document).ready(function($) {$(".give-recurring-cancel").on("click", function() { if(confirm("' . __( "Do you really want to cancel your subscription?", "give_paymill" ) . '")) {return true;}return false;});});</script>';
+	$link .= '<script type="text/javascript">jQuery(document).ready(function($) {$(".give-recurring-cancel").on("click", function() { if(confirm("' . esc_html__( "Do you really want to cancel your subscription?", 'give-paymill' ) . '")) {return true;}return false;});});</script>';
 
 	return $link;
 
@@ -507,7 +511,7 @@ add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 
 function give_paymill_cancel_subscription( $data ) {
 	if ( wp_verify_nonce( $data['_wpnonce'], 'give_paymill_cancel' ) ) {
 
-		global $give_options;
+		$give_options = give_get_settings();
 
 		if ( ! class_exists( 'Services_Paymill_Subscriptions' ) ) {
 			require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
@@ -540,7 +544,7 @@ function give_paymill_cancel_subscription( $data ) {
 
 		}
 		catch ( Exception $e ) {
-			wp_die( '<pre>' . $e . '</pre>', __( 'Error', 'give_paymill' ) );
+			wp_die( '<pre>' . $e . '</pre>', esc_html__( 'Error', 'give-paymill' ) );
 		}
 
 	}
@@ -565,7 +569,7 @@ function give_paymill_event_listener() {
 
 	if ( isset( $_GET['give-listener'] ) && $_GET['give-listener'] == 'paymill' ) {
 
-		global $give_options;
+		$give_options = give_get_settings();
 
 		if ( ! class_exists( 'Services_Paymill_Subscriptions' ) ) {
 			require_once GIVE_PAYMILL_PLUGIN_DIR . '/Paymill/Subscriptions.php';
@@ -651,33 +655,33 @@ function give_paymill_add_settings( $settings ) {
 
 	$paymill_settings = array(
 		array(
-			'name' => '<strong>' . __( 'Paymill Settings', 'give_paymill' ) . '</strong>',
+			'name' => '<strong>' . esc_html__( 'Paymill Settings', 'give-paymill' ) . '</strong>',
 			'desc' => '<hr>',
 			'id'   => 'give_title_paymill',
 			'type' => 'give_title'
 		),
 		array(
-			'name' => __( 'Live Private Key', 'give_paymill' ),
-			'desc' => __( 'Enter your live API key, found in your Paymill Account Settings', 'give_paymill' ),
+			'name' => esc_html__( 'Live Private Key', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your live API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'id'   => 'paymill_live_key',
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_live_public_key',
-			'name' => __( 'Live Public Key', 'give_paymill' ),
-			'desc' => __( 'Enter your live public API key, found in your Paymill Account Settings', 'give_paymill' ),
+			'name' => esc_html__( 'Live Public Key', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your live public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_test_key',
-			'name' => __( 'Test Private Key', 'give_paymill' ),
-			'desc' => __( 'Enter your test API key, found in your Paymill Account Settings', 'give_paymill' ),
+			'name' => esc_html__( 'Test Private Key', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your test API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_test_public_key',
-			'name' => __( 'Test Public Key', 'give_paymill' ),
-			'desc' => __( 'Enter your test public API key, found in your Paymill Account Settings', 'give_paymill' ),
+			'name' => esc_html__( 'Test Public Key', 'give-paymill' ),
+			'desc' => esc_html__( 'Enter your test public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		)
 	);
@@ -694,7 +698,7 @@ add_filter( 'give_settings_gateways', 'give_paymill_add_settings' );
  *
  */
 function give_paymill_js() {
-	global $give_options;
+	$give_options = give_get_settings();
 
 	$publishable_key = null;
 
@@ -741,8 +745,8 @@ function give_paymill_admin_js( $hook ) {
 	//Localize strings & variables for JS
 	wp_localize_script( 'give-paymill-admin-forms-js', 'give_admin_paymill_vars', array(
 		'give_version'   => GIVE_VERSION,
-		'invalid_time'   => __( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ),
-		'invalid_period' => __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give_paymill' )
+		'invalid_time'   => esc_html__( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ),
+		'invalid_period' => esc_html__( 'Paymill only permits yearly, monthly, and weekly plans.', 'give-paymill' )
 	) );
 
 }
@@ -752,7 +756,7 @@ add_action( 'admin_enqueue_scripts', 'give_paymill_admin_js' );
 
 function give_paymill_public_key() {
 
-	global $give_options;
+	$give_options = give_get_settings();
 
 	if ( give_is_test_mode() ) {
 		$public_key = isset( $give_options['paymill_test_public_key'] ) ? trim( $give_options['paymill_test_public_key'] ) : '';

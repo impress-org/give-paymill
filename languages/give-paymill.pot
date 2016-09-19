@@ -1,132 +1,120 @@
+# Copyright (C) 2016 Give - Paymill
+# This file is distributed under the same license as the Give - Paymill package.
 msgid ""
 msgstr ""
-"Project-Id-Version: Give - Paymill Gateway\n"
-"POT-Creation-Date: 2015-04-03 13:45-0800\n"
-"PO-Revision-Date: 2015-04-03 13:46-0800\n"
-"Last-Translator: \n"
-"Language-Team: \n"
+"Project-Id-Version: Give - Paymill\n"
+"Report-Msgid-Bugs-To: https://github.com/WordImpress/Give-Paymill\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"X-Generator: Poedit 1.7.5\n"
+"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
+"Language-Team: WordImpress <info@wordimpress.com>\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
-"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;"
-"esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;"
-"_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
-
-#: give-paymill.php:56
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+#: give-paymill.php:115
 msgid "Credit Card"
 msgstr ""
 
-#: give-paymill.php:89
+#: give-paymill.php:167
 msgid "Missing token. Please contact support."
 msgstr ""
 
-#: give-paymill.php:176
-#, php-format
+#: give-paymill.php:339
 msgid "Merchant Error: %s"
 msgstr ""
 
-#: give-paymill.php:223
+#: give-paymill.php:435
 msgid "Customer Creation Failed"
 msgstr ""
 
-#: give-paymill.php:223
-#, php-format
+#: give-paymill.php:435
 msgid "Customer creation failed while processing a payment. Payment Data: %s"
 msgstr ""
 
-#: give-paymill.php:241 give-paymill.php:250
+#: give-paymill.php:471, give-paymill.php:489
 msgid "Paymill Error"
 msgstr ""
 
-#: give-paymill.php:241
-msgid "Payment creation failed or payment not verified. Transaction details: "
+#: give-paymill.php:471
+msgid "Payment creation failed or payment not verified. Details: %s"
 msgstr ""
 
-#: give-paymill.php:242
-msgid ""
-"Your payment could not be recorded, please contact the site administrator."
+#: give-paymill.php:473
+msgid "Your payment could not be recorded, please contact the site administrator."
 msgstr ""
 
-#: give-paymill.php:250
-msgid ""
-"There was an error encountered while processing the payment. Error details: "
+#: give-paymill.php:489
+msgid "There was an error encountered while processing the payment. Details: %s"
 msgstr ""
 
-#: give-paymill.php:251
-msgid ""
-"There was an error processing your payment, please ensure you have entered "
-"your card number correctly."
+#: give-paymill.php:491
+msgid "There was an error processing your payment, please ensure you have entered your card number correctly."
 msgstr ""
 
-#: give-paymill.php:326 give-paymill.php:350
+#: give-paymill.php:649, give-paymill.php:697, give-paymill.php:1493
 msgid "Paymill only permits yearly, monthly, and weekly plans."
 msgstr ""
 
-#: give-paymill.php:326 give-paymill.php:330 give-paymill.php:350
-#: give-paymill.php:354 give-paymill.php:401 give-paymill.php:540
+#: give-paymill.php:649, give-paymill.php:657, give-paymill.php:697, give-paymill.php:705, give-paymill.php:809, give-paymill.php:1089
 msgid "Error"
 msgstr ""
 
-#: give-paymill.php:330 give-paymill.php:354
+#: give-paymill.php:657, give-paymill.php:705, give-paymill.php:1491
 msgid "Paymill requires that the Times option be set to 0."
 msgstr ""
 
-#: give-paymill.php:401
+#: give-paymill.php:809
 msgid "There was an error creating a payment plan with Paymill."
 msgstr ""
 
-#: give-paymill.php:483
+#: give-paymill.php:975
 msgid "Cancel your subscription"
 msgstr ""
 
-#: give-paymill.php:484
+#: give-paymill.php:977
 msgid "Cancel Subscription"
 msgstr ""
 
-#: give-paymill.php:487
-msgid ""
-"Do you really want to cancel your subscription? You will retain access for "
-"the length of time you have paid for."
+#: give-paymill.php:983
+msgid "Do you really want to cancel your subscription?"
 msgstr ""
 
-#: give-paymill.php:653
+#: give-paymill.php:1311
 msgid "Paymill Settings"
 msgstr ""
 
-#: give-paymill.php:659
+#: give-paymill.php:1323
 msgid "Live Private Key"
 msgstr ""
 
-#: give-paymill.php:660
-msgid "Enter your live API key, found in your Paymill Account Settings"
+#: give-paymill.php:1325
+msgid "Enter your live API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:666
+#: give-paymill.php:1337
 msgid "Live Public Key"
 msgstr ""
 
-#: give-paymill.php:667
-msgid "Enter your live public API key, found in your Paymill Account Settings"
+#: give-paymill.php:1339
+msgid "Enter your live public API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:672
+#: give-paymill.php:1349
 msgid "Test Private Key"
 msgstr ""
 
-#: give-paymill.php:673
-msgid "Enter your test API key, found in your Paymill Account Settings"
+#: give-paymill.php:1351
+msgid "Enter your test API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:678
+#: give-paymill.php:1361
 msgid "Test Public Key"
 msgstr ""
 
-#: give-paymill.php:679
-msgid "Enter your test public API key, found in your Paymill Account Settings"
+#: give-paymill.php:1363
+msgid "Enter your test public API key, found in your Paymill Account Settings."
 msgstr ""
