@@ -1,8 +1,8 @@
 === Give - Paymill Gateway ===
-Contributors: wordimpress, dlocc, webdevmattcrom
+Contributors: wordimpress, dlocc, webdevmattcrom, mordauk, ramiy
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 3.8
-Tested up to: 4.2.2
+Tested up to: 4.6
 Stable tag: 1.1
 License: GPLv3
 License URI: http://www.gnu.org/licenses/gpl-3.0.html
