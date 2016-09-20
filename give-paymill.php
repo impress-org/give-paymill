@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Give - Paymill Gateway
- * Plugin URL:  https://givewp.com/addons/paymill-gateway/
+ * Plugin URI:  https://givewp.com/addons/paymill-gateway/
  * Description: Adds a payment gateway for Paymill.com
  * Version:     1.1
  * Author:      WordImpress
