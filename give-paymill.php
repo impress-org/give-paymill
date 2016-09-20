@@ -1,15 +1,14 @@
 <?php
-/*
-Plugin Name: Give - Paymill Gateway
-Plugin URL: http://wordimpress.com/addons/paymill-gatways
-Description: Adds a payment gateway for Paymill.com
-Version: 1.1
-Author: WordImpress
-Author URI: http://givewp.com
-Text Domain: give-paymill
-Domain Path: /languages
-Contributors: Devin Walker, webdevmattcrom, mordauk, Pippin Williamson
-*/
+/**
+ * Plugin Name: Give - Paymill Gateway
+ * Plugin URL:  https://givewp.com/addons/paymill-gateway/
+ * Description: Adds a payment gateway for Paymill.com
+ * Version:     1.1
+ * Author:      WordImpress
+ * Author URI:  https://wordimpress.com
+ * Text Domain: give-paymill
+ * Domain Path: /languages
+ */
 
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
