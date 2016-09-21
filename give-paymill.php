@@ -31,6 +31,7 @@ if ( ! defined( 'GIVE_PAYMILL_BASENAME' ) ) {
 
 // Plugin includes
 include( dirname( __FILE__ ) . '/includes/admin/give-paymill-admin.php' );
+include( dirname( __FILE__ ) . '/includes/admin/plugins.php' );
 
 /**
  * Paymill Licensing
