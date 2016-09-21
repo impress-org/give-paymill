@@ -53,11 +53,12 @@ add_action( 'init', 'give_paymill_textdomain' );
 
 // registers the gateway
 function give_paymill_register_gateway( $gateways ) {
-	// Format: ID => Name
-	$gateways['paymill'] = array( 'admin_label' => 'Paymill', 'checkout_label' => esc_html__( 'Credit Card', 'give-paymill' ) );
+	$gateways['paymill'] = array(
+		'admin_label'    => esc_html__( 'Paymill', 'give-paymill' ),
+		'checkout_label' => esc_html__( 'Credit Card', 'give-paymill' )
+	);
 
 	return $gateways;
-
 }
 
 add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
