@@ -16,23 +16,23 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 // Plugin constants
+if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
+	define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
+}
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
-if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
-}
 if ( ! defined( 'GIVE_PAYMILL_BASENAME' ) ) {
 	define( 'GIVE_PAYMILL_BASENAME', plugin_basename( __FILE__ ) );
 }
 
 // Plugin includes
-include( dirname( __FILE__ ) . '/includes/admin/give-paymill-activation.php' );
-include( dirname( __FILE__ ) . '/includes/admin/give-paymill-admin.php' );
-include( dirname( __FILE__ ) . '/includes/admin/plugins.php' );
+include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/give-paymill-activation.php' );
+include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/give-paymill-admin.php' );
+include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/plugins.php' );
 
 /**
  * Paymill Licensing
