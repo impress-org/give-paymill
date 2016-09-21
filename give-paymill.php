@@ -10,16 +10,24 @@
  * Domain Path: /languages
  */
 
+// Exit if accessed directly
+if ( ! defined( 'ABSPATH' ) ) {
+	exit;
+}
+
+// Plugin constants
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
 }
-
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_URL', plugin_dir_url( __FILE__ ) );
 }
-
-define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
-
+if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
+	define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
+}
+if ( ! defined( 'GIVE_PAYMILL_BASENAME' ) ) {
+	define( 'GIVE_PAYMILL_BASENAME', plugin_basename( __FILE__ ) );
+}
 
 
 /**
