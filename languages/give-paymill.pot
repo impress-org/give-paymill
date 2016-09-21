@@ -15,106 +15,122 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: give-paymill.php:115
-msgid "Credit Card"
-msgstr ""
-
-#: give-paymill.php:167
+#: give-paymill.php:171
 msgid "Missing token. Please contact support."
 msgstr ""
 
-#: give-paymill.php:339
+#: give-paymill.php:343
 msgid "Merchant Error: %s"
 msgstr ""
 
-#: give-paymill.php:435
+#: give-paymill.php:439
 msgid "Customer Creation Failed"
 msgstr ""
 
-#: give-paymill.php:435
+#: give-paymill.php:439
 msgid "Customer creation failed while processing a payment. Payment Data: %s"
 msgstr ""
 
-#: give-paymill.php:471, give-paymill.php:489
+#: give-paymill.php:475, give-paymill.php:493
 msgid "Paymill Error"
 msgstr ""
 
-#: give-paymill.php:471
+#: give-paymill.php:475
 msgid "Payment creation failed or payment not verified. Details: %s"
 msgstr ""
 
-#: give-paymill.php:473
+#: give-paymill.php:477
 msgid "Your payment could not be recorded, please contact the site administrator."
 msgstr ""
 
-#: give-paymill.php:489
+#: give-paymill.php:493
 msgid "There was an error encountered while processing the payment. Details: %s"
 msgstr ""
 
-#: give-paymill.php:491
+#: give-paymill.php:495
 msgid "There was an error processing your payment, please ensure you have entered your card number correctly."
 msgstr ""
 
-#: give-paymill.php:649, give-paymill.php:697, give-paymill.php:1493
+#: give-paymill.php:655, give-paymill.php:703, give-paymill.php:1407
 msgid "Paymill only permits yearly, monthly, and weekly plans."
 msgstr ""
 
-#: give-paymill.php:649, give-paymill.php:657, give-paymill.php:697, give-paymill.php:705, give-paymill.php:809, give-paymill.php:1089
+#: give-paymill.php:655, give-paymill.php:663, give-paymill.php:703, give-paymill.php:711, give-paymill.php:815, give-paymill.php:1089
 msgid "Error"
 msgstr ""
 
-#: give-paymill.php:657, give-paymill.php:705, give-paymill.php:1491
+#: give-paymill.php:663, give-paymill.php:711, give-paymill.php:1405
 msgid "Paymill requires that the Times option be set to 0."
 msgstr ""
 
-#: give-paymill.php:809
+#: give-paymill.php:815
 msgid "There was an error creating a payment plan with Paymill."
 msgstr ""
 
-#: give-paymill.php:975
+#: give-paymill.php:977
 msgid "Cancel your subscription"
 msgstr ""
 
-#: give-paymill.php:977
+#: give-paymill.php:979
 msgid "Cancel Subscription"
 msgstr ""
 
-#: give-paymill.php:983
+#: give-paymill.php:985
 msgid "Do you really want to cancel your subscription?"
 msgstr ""
 
-#: give-paymill.php:1311
+#: includes/admin/give-paymill-admin.php:55
+msgid "Paymill"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:57
+msgid "Credit Card"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:101
 msgid "Paymill Settings"
 msgstr ""
 
-#: give-paymill.php:1323
+#: includes/admin/give-paymill-admin.php:113
 msgid "Live Private Key"
 msgstr ""
 
-#: give-paymill.php:1325
+#: includes/admin/give-paymill-admin.php:115
 msgid "Enter your live API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:1337
+#: includes/admin/give-paymill-admin.php:127
 msgid "Live Public Key"
 msgstr ""
 
-#: give-paymill.php:1339
+#: includes/admin/give-paymill-admin.php:129
 msgid "Enter your live public API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:1349
+#: includes/admin/give-paymill-admin.php:139
 msgid "Test Private Key"
 msgstr ""
 
-#: give-paymill.php:1351
+#: includes/admin/give-paymill-admin.php:141
 msgid "Enter your test API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: give-paymill.php:1361
+#: includes/admin/give-paymill-admin.php:151
 msgid "Test Public Key"
 msgstr ""
 
-#: give-paymill.php:1363
+#: includes/admin/give-paymill-admin.php:153
 msgid "Enter your test public API key, found in your Paymill Account Settings."
+msgstr ""
+
+#: includes/admin/plugins.php:59
+msgid "Settings"
+msgstr ""
+
+#: includes/admin/plugins.php:127
+msgid "Documentation"
+msgstr ""
+
+#: includes/admin/plugins.php:147
+msgid "Add-ons"
 msgstr ""
