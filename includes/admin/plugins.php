@@ -5,7 +5,7 @@
  * @package     Give
  * @copyright   Copyright (c) 2016, WordImpress
  * @license     http://opensource.org/licenses/gpl-2.0.php GNU Public License
- * @since       1.2
+ * @since       1.1
  */
 
 // Exit if accessed directly
@@ -16,7 +16,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 /**
  * Plugins row action links
  *
- * @since 1.2
+ * @since 1.1
  *
  * @param array $actions An array of plugin action links.
  *
@@ -40,7 +40,7 @@ add_filter( 'plugin_action_links_' . GIVE_PAYMILL_BASENAME, 'give_paymill_plugin
 /**
  * Plugin row meta links
  *
- * @since 1.2
+ * @since 1.1
  *
  * @param array  $plugin_meta An array of the plugin's metadata.
  * @param string $plugin_file Path to the plugin file, relative to the plugins directory.

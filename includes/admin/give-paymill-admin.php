@@ -5,7 +5,7 @@
  * @package     Give
  * @copyright   Copyright (c) 2015, WordImpress
  * @license     http://opensource.org/licenses/gpl-1.0.php GNU Public License
- * @since       1.2
+ * @since       1.1
  */
 
 // Exit if accessed directly
