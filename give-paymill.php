@@ -21,10 +21,13 @@ if ( ! defined( 'GIVE_PAYMILL_PLUGIN_URL' ) ) {
 define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
 
 
-/*--------------------------------------------------------------------------
-LICENSING / UPDATES
---------------------------------------------------------------------------*/
 
+/**
+ * Paymill Licensing
+ *
+ * @access      public
+ * @since       1.0
+ */
 function give_add_paymill_licensing() {
 	if ( class_exists( 'Give_License' ) ) {
 		new Give_License( __FILE__, 'Paymill Gateway', GIVE_PAYMILL_VERSION, 'WordImpress', 'paymill_license_key' );
@@ -33,11 +36,12 @@ function give_add_paymill_licensing() {
 
 add_action( 'plugins_loaded', 'give_add_paymill_licensing' );
 
-
-/* ------------------------------------------------------------------------
-i18n
---------------------------------------------------------------------------*/
-
+/**
+ * Paymill i18n
+ *
+ * @access      public
+ * @since       1.0
+ */
 function give_paymill_textdomain() {
 
 	// Set filter for plugin's languages directory
@@ -50,8 +54,16 @@ function give_paymill_textdomain() {
 
 add_action( 'init', 'give_paymill_textdomain' );
 
-
-// registers the gateway
+/**
+ * Register Paymill Gateway
+ *
+ * @access      public
+ * @since       1.0
+ *
+ * @param array $gateways
+ *
+ * @return array
+ */
 function give_paymill_register_gateway( $gateways ) {
 	$gateways['paymill'] = array(
 		'admin_label'    => esc_html__( 'Paymill', 'give-paymill' ),
@@ -263,7 +275,6 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
  * @since       1.0
  * @return      int
  */
-
 function give_paymill_create_recurring_plans( $form_id = 0 ) {
 	global $post;
 
@@ -418,7 +429,6 @@ add_action( 'save_post', 'give_paymill_create_recurring_plans', 999 );
  * @since       1.1
  * @return      bool
  */
-
 function give_paymill_is_recurring_purchase( $purchase_data ) {
 
 	if ( ! class_exists( 'Give_Recurring' ) ) {
@@ -440,7 +450,6 @@ function give_paymill_is_recurring_purchase( $purchase_data ) {
  * @since       1.0
  * @return      string|bool
  */
-
 function give_paymill_get_plan_id( $purchase_data ) {
 
 	$form_id  = $purchase_data['post_data']['give-form-id'];
@@ -507,7 +516,6 @@ add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 
  * @since       1.0
  * @return      void
  */
-
 function give_paymill_cancel_subscription( $data ) {
 	if ( wp_verify_nonce( $data['_wpnonce'], 'give_paymill_cancel' ) ) {
 
@@ -560,7 +568,6 @@ add_action( 'give_cancel_recurring_paymill_customer', 'give_paymill_cancel_subsc
  * @since       1.0
  * @return      void
  */
-
 function give_paymill_event_listener() {
 
 	if ( ! class_exists( 'Give_Recurring' ) ) {
@@ -650,7 +657,15 @@ function give_paymill_event_listener() {
 add_action( 'init', 'give_paymill_event_listener' );
 
 
-// adds the settings to the Payment Gateways section
+/**
+ * Register the gateway settings
+ *
+ * @since 1.0
+ *
+ * @param array $settings
+ *
+ * @return array
+ */
 function give_paymill_add_settings( $settings ) {
 
 	$paymill_settings = array(
@@ -694,8 +709,7 @@ add_filter( 'give_settings_gateways', 'give_paymill_add_settings' );
 /**
  * Frontend Scripts
  *
- * @description Enqueue the scripts to the frontend of the website
- *
+ * Enqueue the scripts to the frontend of the website
  */
 function give_paymill_js() {
 	$give_options = give_get_settings();
@@ -729,7 +743,7 @@ add_action( 'wp_enqueue_scripts', 'give_paymill_js', 100 );
  *
  * Frontend Scripts
  *
- * @description Enqueue the scripts to the frontend of the website
+ * Enqueue the scripts to the frontend of the website
  *
  * @param $hook
  */
