@@ -259,7 +259,7 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
 /**
  * Create Recurring Paymill Plans
  *
- * @description Create recurring payment plans when Give Forms are saved; This is in order to support the Recurring Payments module
+ * Create recurring payment plans when Give Forms are saved; This is in order to support the Recurring Payments module
  *
  * @access      public
  * @since       1.0
