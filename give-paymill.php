@@ -29,6 +29,8 @@ if ( ! defined( 'GIVE_PAYMILL_BASENAME' ) ) {
 	define( 'GIVE_PAYMILL_BASENAME', plugin_basename( __FILE__ ) );
 }
 
+// Plugin includes
+include( dirname( __FILE__ ) . '/includes/admin/give-paymill-admin.php' );
 
 /**
  * Paymill Licensing
@@ -61,27 +63,6 @@ function give_paymill_textdomain() {
 }
 
 add_action( 'init', 'give_paymill_textdomain' );
-
-/**
- * Register Paymill Gateway
- *
- * @access      public
- * @since       1.0
- *
- * @param array $gateways
- *
- * @return array
- */
-function give_paymill_register_gateway( $gateways ) {
-	$gateways['paymill'] = array(
-		'admin_label'    => esc_html__( 'Paymill', 'give-paymill' ),
-		'checkout_label' => esc_html__( 'Credit Card', 'give-paymill' )
-	);
-
-	return $gateways;
-}
-
-add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );
 
 // processes the payment
 function give_paymill_process_paymill_payment( $purchase_data ) {
@@ -664,55 +645,6 @@ function give_paymill_event_listener() {
 
 add_action( 'init', 'give_paymill_event_listener' );
 
-
-/**
- * Register the gateway settings
- *
- * @since 1.0
- *
- * @param array $settings
- *
- * @return array
- */
-function give_paymill_add_settings( $settings ) {
-
-	$paymill_settings = array(
-		array(
-			'name' => '<strong>' . esc_html__( 'Paymill Settings', 'give-paymill' ) . '</strong>',
-			'desc' => '<hr>',
-			'id'   => 'give_title_paymill',
-			'type' => 'give_title'
-		),
-		array(
-			'name' => esc_html__( 'Live Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live API key, found in your Paymill Account Settings.', 'give-paymill' ),
-			'id'   => 'paymill_live_key',
-			'type' => 'text',
-		),
-		array(
-			'id'   => 'paymill_live_public_key',
-			'name' => esc_html__( 'Live Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live public API key, found in your Paymill Account Settings.', 'give-paymill' ),
-			'type' => 'text',
-		),
-		array(
-			'id'   => 'paymill_test_key',
-			'name' => esc_html__( 'Test Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test API key, found in your Paymill Account Settings.', 'give-paymill' ),
-			'type' => 'text',
-		),
-		array(
-			'id'   => 'paymill_test_public_key',
-			'name' => esc_html__( 'Test Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test public API key, found in your Paymill Account Settings.', 'give-paymill' ),
-			'type' => 'text',
-		)
-	);
-
-	return array_merge( $settings, $paymill_settings );
-}
-
-add_filter( 'give_settings_gateways', 'give_paymill_add_settings' );
 
 /**
  * Frontend Scripts
