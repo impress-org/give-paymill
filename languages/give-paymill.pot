@@ -15,68 +15,76 @@ msgstr ""
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: give-paymill.php:171
+#: give-paymill.php:173
 msgid "Missing token. Please contact support."
 msgstr ""
 
-#: give-paymill.php:343
+#: give-paymill.php:345
 msgid "Merchant Error: %s"
 msgstr ""
 
-#: give-paymill.php:439
+#: give-paymill.php:441
 msgid "Customer Creation Failed"
 msgstr ""
 
-#: give-paymill.php:439
+#: give-paymill.php:441
 msgid "Customer creation failed while processing a payment. Payment Data: %s"
 msgstr ""
 
-#: give-paymill.php:475, give-paymill.php:493
+#: give-paymill.php:477, give-paymill.php:495
 msgid "Paymill Error"
 msgstr ""
 
-#: give-paymill.php:475
+#: give-paymill.php:477
 msgid "Payment creation failed or payment not verified. Details: %s"
 msgstr ""
 
-#: give-paymill.php:477
+#: give-paymill.php:479
 msgid "Your payment could not be recorded, please contact the site administrator."
 msgstr ""
 
-#: give-paymill.php:493
+#: give-paymill.php:495
 msgid "There was an error encountered while processing the payment. Details: %s"
 msgstr ""
 
-#: give-paymill.php:495
+#: give-paymill.php:497
 msgid "There was an error processing your payment, please ensure you have entered your card number correctly."
 msgstr ""
 
-#: give-paymill.php:655, give-paymill.php:703, give-paymill.php:1407
+#: give-paymill.php:657, give-paymill.php:705, give-paymill.php:1409
 msgid "Paymill only permits yearly, monthly, and weekly plans."
 msgstr ""
 
-#: give-paymill.php:655, give-paymill.php:663, give-paymill.php:703, give-paymill.php:711, give-paymill.php:815, give-paymill.php:1089
+#: give-paymill.php:657, give-paymill.php:665, give-paymill.php:705, give-paymill.php:713, give-paymill.php:817, give-paymill.php:1091
 msgid "Error"
 msgstr ""
 
-#: give-paymill.php:663, give-paymill.php:711, give-paymill.php:1405
+#: give-paymill.php:665, give-paymill.php:713, give-paymill.php:1407
 msgid "Paymill requires that the Times option be set to 0."
 msgstr ""
 
-#: give-paymill.php:815
+#: give-paymill.php:817
 msgid "There was an error creating a payment plan with Paymill."
 msgstr ""
 
-#: give-paymill.php:977
+#: give-paymill.php:979
 msgid "Cancel your subscription"
 msgstr ""
 
-#: give-paymill.php:979
+#: give-paymill.php:981
 msgid "Cancel Subscription"
 msgstr ""
 
-#: give-paymill.php:985
+#: give-paymill.php:987
 msgid "Do you really want to cancel your subscription?"
+msgstr ""
+
+#: includes/admin/give-paymill-activation.php:95
+msgid "Paymill Gateway"
+msgstr ""
+
+#: includes/admin/give-paymill-activation.php:139
+msgid "<strong>Activation Error:</strong> We noticed Give is not active. Please activate Give in order to use the Paymill Gateway."
 msgstr ""
 
 #: includes/admin/give-paymill-admin.php:55
