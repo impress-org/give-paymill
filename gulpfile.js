@@ -58,5 +58,5 @@ gulp.task('textdomain', function () {
  ------------------------------------- */
 gulp.task('default', function () {
     // Run all the tasks!
-    gulp.start('pot');
+    gulp.start('textdomain','pot');
 });
