@@ -5,7 +5,7 @@ Requires at least: 3.8
 Tested up to: 4.6
 Stable tag: 1.1
 License: GPLv3
-License URI: http://www.gnu.org/licenses/gpl-3.0.html
+License URI: https://opensource.org/licenses/GPL-3.0
 
 Paymill Gateway Add-on for Give
 
