@@ -17,7 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants
 if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_VERSION', '1.0.2' );
+	define( 'GIVE_PAYMILL_VERSION', '1.1' );
+}
+if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.7' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
@@ -32,10 +35,9 @@ if ( ! defined( 'GIVE_PAYMILL_BASENAME' ) ) {
 // Plugin includes
 include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/give-paymill-activation.php' );
 include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/give-paymill-admin.php' );
-include( GIVE_PAYMILL_PLUGIN_DIR . '/includes/admin/plugins.php' );
 
 /**
- * Paymill Licensing
+ * Paymill Licensing.
  *
  * @access      public
  * @since       1.0
@@ -49,7 +51,7 @@ function give_add_paymill_licensing() {
 add_action( 'plugins_loaded', 'give_add_paymill_licensing' );
 
 /**
- * Paymill i18n
+ * Paymill i18n.
  *
  * @access      public
  * @since       1.0
@@ -66,7 +68,11 @@ function give_paymill_textdomain() {
 
 add_action( 'init', 'give_paymill_textdomain' );
 
-// processes the payment
+/**
+ * Processes the payment
+ *
+ * @param $purchase_data
+ */
 function give_paymill_process_paymill_payment( $purchase_data ) {
 
 	$give_options = give_get_settings();
@@ -243,8 +249,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			}
 
-		}
-		catch ( Exception $e ) {
+		} catch ( Exception $e ) {
 			give_record_gateway_error( esc_html__( 'Paymill Error', 'give-paymill' ), sprintf( esc_html__( 'There was an error encountered while processing the payment. Details: %s', 'give-paymill' ), json_encode( $e ) ) );
 			give_set_error( 'payment_error', esc_html__( 'There was an error processing your payment, please ensure you have entered your card number correctly.', 'give-paymill' ) );
 			give_send_back_to_checkout( '?payment-mode=' . $purchase_data['post_data']['give-gateway'] );
@@ -260,18 +265,21 @@ add_action( 'give_gateway_paymill', 'give_paymill_process_paymill_payment' );
 /**
  * Create Recurring Paymill Plans
  *
- * Create recurring payment plans when Give Forms are saved; This is in order to support the Recurring Payments module
+ * Create recurring payment plans when Give Forms are saved; This is in order to support the Recurring Payments module.
  *
  * @access      public
  * @since       1.0
- * @return      int
+ *
+ * @param int $form_id
+ *
+ * @return int
  */
 function give_paymill_create_recurring_plans( $form_id = 0 ) {
 	global $post;
 
 	$give_options = give_get_settings();
 
-	//Safeguards
+	//Safeguards.
 	if ( ! class_exists( 'Give_Recurring' ) ) {
 		return $form_id;
 	}
@@ -404,8 +412,7 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 			}
 
 		}
-	}
-	catch ( Exception $e ) {
+	} catch ( Exception $e ) {
 		wp_die( esc_html__( 'There was an error creating a payment plan with Paymill.', 'give-paymill' ), esc_html__( 'Error', 'give-paymill' ) );
 	}
 }
@@ -463,11 +470,16 @@ function give_paymill_get_plan_id( $purchase_data ) {
 
 
 /**
- * Filter the Recurring Payments cancellation link
+ * Filter the Recurring Payments cancellation link.
  *
  * @access      public
  * @since       1.0
  * @return      string
+ *
+ * @param string $link
+ * @param int    $user_id
+ *
+ * @return string
  */
 function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 
@@ -501,13 +513,14 @@ add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 
 
 
 /**
- * Process a recurring payments cancellation
+ * Process a recurring payments cancellation.
  *
  * @access      public
  * @since       1.0
  * @return      void
  */
 function give_paymill_cancel_subscription( $data ) {
+
 	if ( wp_verify_nonce( $data['_wpnonce'], 'give_paymill_cancel' ) ) {
 
 		$give_options = give_get_settings();
@@ -541,8 +554,7 @@ function give_paymill_cancel_subscription( $data ) {
 			);
 			exit;
 
-		}
-		catch ( Exception $e ) {
+		} catch ( Exception $e ) {
 			wp_die( '<pre>' . $e . '</pre>', esc_html__( 'Error', 'give-paymill' ) );
 		}
 
@@ -553,7 +565,7 @@ add_action( 'give_cancel_recurring_paymill_customer', 'give_paymill_cancel_subsc
 
 
 /**
- * Listen for Paymill events, primarily recurring payments
+ * Listen for Paymill events, primarily recurring payments.
  *
  * @access      public
  * @since       1.0
@@ -697,19 +709,23 @@ function give_paymill_admin_js( $hook ) {
 		return;
 	}
 
-	wp_enqueue_script( 'give-paymill-admin-forms-js', GIVE_PAYMILL_PLUGIN_URL . 'assets/js/give-paymill-admin.js', 'jquery', GIVE_PAYMILL_VERSION );
-	//Localize strings & variables for JS
+	wp_register_script( 'give-paymill-admin-forms-js', GIVE_PAYMILL_PLUGIN_URL . 'assets/js/give-paymill-admin.js', 'jquery', GIVE_PAYMILL_VERSION );
+	wp_enqueue_script( 'give-paymill-admin-forms-js' );
+
+	//Localize strings & variables for JS.
 	wp_localize_script( 'give-paymill-admin-forms-js', 'give_admin_paymill_vars', array(
 		'give_version'   => GIVE_VERSION,
-		'invalid_time'   => esc_html__( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ),
-		'invalid_period' => esc_html__( 'Paymill only permits yearly, monthly, and weekly plans.', 'give-paymill' )
+		'invalid_time'   => __( 'Paymill requires that the Times option be set to 0.', 'give-paymill' ),
+		'invalid_period' => __( 'Paymill only permits yearly, monthly, and weekly plans.', 'give-paymill' )
 	) );
 
 }
 
 add_action( 'admin_enqueue_scripts', 'give_paymill_admin_js' );
 
-
+/**
+ * Paymill public key.
+ */
 function give_paymill_public_key() {
 
 	$give_options = give_get_settings();

@@ -1,8 +1,8 @@
 === Give - Paymill Gateway ===
 Contributors: wordimpress, dlocc, webdevmattcrom, mordauk, ramiy
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
-Requires at least: 3.8
-Tested up to: 4.6
+Requires at least: 4.2
+Tested up to: 4.7
 Stable tag: 1.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -17,7 +17,7 @@ This plugin requires the Give plugin activated to function properly. When activa
 
 = Minimum Requirements =
 
-* WordPress 3.8 or greater
+* WordPress 4.2 or greater
 * PHP version 5.3 or greater
 * MySQL version 5.0 or greater
 * Some payment gateways require fsockopen support (for IPN access)
@@ -40,7 +40,8 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 == Changelog ==
 
 = 1.1 =
-* Support for Recurring Donations Add-on
+* New: Support for Recurring Donations Add-on - https://github.com/WordImpress/Give-Paymill/issues/12
+* New: The plugin now checks to see if Give is active and up to the minimum version required to run the plugin.
 
 = 1.0.2 =
 * Fix: 3-D Secure Payments passing incorrect amount_int value which caused transactions to fail (missing * 100 for cents amount) thanks @revolutionfrance https://wordpress.org/support/topic/paymill-bug
