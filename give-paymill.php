@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Give - Paymill Gateway
  * Plugin URI:  https://givewp.com/addons/paymill-gateway/
- * Description: Adds a payment gateway for Paymill.com
+ * Description: Process online donations via the Paymill payment gateway.
  * Version:     1.1
  * Author:      WordImpress
  * Author URI:  https://wordimpress.com
@@ -20,7 +20,7 @@ if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
 	define( 'GIVE_PAYMILL_VERSION', '1.1' );
 }
 if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.7' );
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.8.2' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
