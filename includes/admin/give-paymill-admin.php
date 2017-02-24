@@ -48,33 +48,33 @@ function give_paymill_add_settings( $settings ) {
 
 	$paymill_settings = array(
 		array(
-			'name' => '<strong>' . esc_html__( 'Paymill Settings', 'give-paymill' ) . '</strong>',
+			'name' => '<strong>' . __( 'Paymill', 'give-paymill' ) . '</strong>',
 			'desc' => '<hr>',
 			'id'   => 'give_title_paymill',
 			'type' => 'give_title'
 		),
 		array(
-			'name' => esc_html__( 'Live Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live API key, found in your Paymill Account Settings.', 'give-paymill' ),
+			'name' => __( 'Live Private Key', 'give-paymill' ),
+			'desc' => __( 'Enter your live API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'id'   => 'paymill_live_key',
-			'type' => 'text',
+			'type' => 'api_key',
 		),
 		array(
 			'id'   => 'paymill_live_public_key',
-			'name' => esc_html__( 'Live Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your live public API key, found in your Paymill Account Settings.', 'give-paymill' ),
+			'name' => __( 'Live Public Key', 'give-paymill' ),
+			'desc' => __( 'Enter your live public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		),
 		array(
 			'id'   => 'paymill_test_key',
-			'name' => esc_html__( 'Test Private Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test API key, found in your Paymill Account Settings.', 'give-paymill' ),
-			'type' => 'text',
+			'name' => __( 'Test Private Key', 'give-paymill' ),
+			'desc' => __( 'Enter your test API key, found in your Paymill Account Settings.', 'give-paymill' ),
+			'type' => 'api_key',
 		),
 		array(
 			'id'   => 'paymill_test_public_key',
-			'name' => esc_html__( 'Test Public Key', 'give-paymill' ),
-			'desc' => esc_html__( 'Enter your test public API key, found in your Paymill Account Settings.', 'give-paymill' ),
+			'name' => __( 'Test Public Key', 'give-paymill' ),
+			'desc' => __( 'Enter your test public API key, found in your Paymill Account Settings.', 'give-paymill' ),
 			'type' => 'text',
 		)
 	);

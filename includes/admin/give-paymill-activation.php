@@ -74,7 +74,7 @@ function give_paymill_activation_banner() {
 			'file'              => __FILE__,
 			'name'              => esc_html__( 'Paymill Gateway', 'give-paymill' ),
 			'version'           => GIVE_PAYMILL_VERSION,
-			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways' ),
+			'settings_url'      => admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=paymill' ),
 			'documentation_url' => 'http://docs.givewp.com/addon-paymill',
 			'support_url'       => 'https://givewp.com/support/',
 			'testing'           => false
@@ -121,7 +121,7 @@ function give_paymill_plugin_action_links( $actions ) {
 	$new_actions = array(
 		'settings' => sprintf(
 			'<a href="%1$s">%2$s</a>',
-			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=paymill-settings' ),
+			admin_url( 'edit.php?post_type=give_forms&page=give-settings&tab=gateways&section=paymill' ),
 			esc_html__( 'Settings', 'give-paymill' )
 		),
 	);

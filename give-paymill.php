@@ -20,7 +20,7 @@ if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
 	define( 'GIVE_PAYMILL_VERSION', '1.1' );
 }
 if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.8.2' );
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.8.3' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
@@ -154,7 +154,9 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 				'status'          => 'pending'
 			);
 
-			if ( give_paymill_is_recurring_purchase( $purchase_data ) && ( ! empty( $customer ) || $customer_exists ) ) {
+			// Impossible condition on purpose
+			// For reference when building Recurring functionality
+			if ( 1 === 2 && ( ! empty( $customer ) || $customer_exists ) ) {
 
 				// Process a recurring subscription purchase
 				$plan_id = give_paymill_get_plan_id( $purchase_data );
@@ -224,7 +226,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 
 			} else {
 
-				give_record_gateway_error( esc_html__( 'Customer Creation Failed', 'give-paymill' ), sprintf( esc_html__( 'Customer creation failed while processing a payment. Payment Data: %s', 'give-paymill' ), json_encode( $payment_data ) ), $payment );
+				give_record_gateway_error( esc_html__( 'Customer Creation Failed', 'give-paymill' ), sprintf( esc_html__( 'Customer creation failed while processing a payment. Payment Data: %s', 'give-paymill' ), json_encode( $payment_data ) ), '' );
 
 			}
 
@@ -418,28 +420,6 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 }
 
 add_action( 'save_post', 'give_paymill_create_recurring_plans', 999 );
-
-
-/**
- * Detect if the current purchase is for a recurring product
- *
- * @access      public
- * @since       1.1
- * @return      bool
- */
-function give_paymill_is_recurring_purchase( $purchase_data ) {
-
-	if ( ! class_exists( 'Give_Recurring' ) ) {
-		return false;
-	}
-
-	if ( Give_Recurring()->is_purchase_recurring( $purchase_data ) ) {
-		return true;
-	}
-
-	return false;
-}
-
 
 /**
  * Retrieve the plan ID from the purchased items
