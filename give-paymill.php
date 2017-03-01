@@ -419,7 +419,7 @@ function give_paymill_create_recurring_plans( $form_id = 0 ) {
 	}
 }
 
-add_action( 'save_post', 'give_paymill_create_recurring_plans', 999 );
+// add_action( 'save_post', 'give_paymill_create_recurring_plans', 999 );
 
 /**
  * Retrieve the plan ID from the purchased items
@@ -489,7 +489,7 @@ function give_paymill_recurring_cancel_link( $link = '', $user_id = 0 ) {
 
 }
 
-add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 10, 2 );
+// add_filter( 'give_recurring_cancel_link', 'give_paymill_recurring_cancel_link', 10, 2 );
 
 
 /**
@@ -541,7 +541,7 @@ function give_paymill_cancel_subscription( $data ) {
 	}
 }
 
-add_action( 'give_cancel_recurring_paymill_customer', 'give_paymill_cancel_subscription' );
+// add_action( 'give_cancel_recurring_paymill_customer', 'give_paymill_cancel_subscription' );
 
 
 /**
@@ -674,7 +674,6 @@ add_action( 'wp_enqueue_scripts', 'give_paymill_js', 100 );
 
 
 /**
- *
  * Frontend Scripts
  *
  * Enqueue the scripts to the frontend of the website
