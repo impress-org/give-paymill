@@ -20,7 +20,7 @@ if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
 	define( 'GIVE_PAYMILL_VERSION', '1.1' );
 }
 if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '1.8.3' );
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '2.0.0' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
@@ -216,7 +216,7 @@ function give_paymill_process_paymill_payment( $purchase_data ) {
 					'currency'    => give_get_currency(),
 					'token'       => sanitize_text_field( $_POST['paymillToken'] ),
 					'client'      => $customer_id,
-					'description' => give_get_purchase_summary( $purchase_data )
+					'description' => give_payment_gateway_donation_summary( $purchase_data )
 				);
 
 				$transaction = $transactionsObject->create( $transaction_params );
