@@ -657,7 +657,7 @@ function give_paymill_js() {
 	}
 
 	wp_enqueue_script( 'paymill-js', 'https://bridge.paymill.com', array( 'jquery' ) );
-	wp_enqueue_script( 'give-paymill-js', GIVE_PAYMILL_PLUGIN_URL . 'give-paymill.js', array(
+	wp_enqueue_script( 'give-paymill-js', GIVE_PAYMILL_PLUGIN_URL . 'assets/js/give-paymill.js', array(
 		'jquery',
 		'paymill-js'
 	), GIVE_PAYMILL_VERSION );
