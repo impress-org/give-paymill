@@ -3,7 +3,7 @@
  * Plugin Name: Give - Paymill Gateway
  * Plugin URI:  https://givewp.com/addons/paymill-gateway/
  * Description: Process online donations via the Paymill payment gateway.
- * Version:     1.1.1
+ * Version:     1.1.0
  * Author:      GiveWP
  * Author URI:  https://givewp.com
  * Text Domain: give-paymill
@@ -17,10 +17,10 @@ if ( ! defined( 'ABSPATH' ) ) {
 
 // Plugin constants
 if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_VERSION', '1.1.1' );
+	define( 'GIVE_PAYMILL_VERSION', '1.1.0' );
 }
 if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '2.0.0' );
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '2.4.0' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );
@@ -719,3 +719,24 @@ function give_paymill_public_key() {
 }
 
 add_action( 'wp_head', 'give_paymill_public_key' );
+
+/**
+ * Register Paymill Gateway
+ *
+ * @access public
+ * @since  1.0
+ *
+ * @param  array $gateways
+ *
+ * @return array
+ */
+function give_paymill_register_gateway( $gateways ) {
+	$gateways['paymill'] = array(
+		'admin_label'    => esc_html__( 'Paymill', 'give-paymill' ),
+		'checkout_label' => esc_html__( 'Credit Card', 'give-paymill' )
+	);
+
+	return $gateways;
+}
+
+add_filter( 'give_payment_gateways', 'give_paymill_register_gateway' );

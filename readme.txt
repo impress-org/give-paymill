@@ -3,7 +3,7 @@ Contributors: givewp, dlocc, webdevmattcrom
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 4.8
 Tested up to: 5.2
-Stable tag: 1.1
+Stable tag: 1.1.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -39,7 +39,8 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
-= 1.1.1: April 16th, 2019 =
+= 1.1.0: April 16th, 2019 =
+* Maintenance: Updated Settings class to be compatible with the upcoming 2.5.0 Give Core version release.
 * Fix: Resolved issue with JS path not properly being loaded resulting in a 404 for the script.
 * Tweak: Updated plugin author and name to GiveWP throughout.
 
