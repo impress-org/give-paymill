@@ -20,9 +20,9 @@ gulp.task('pot', function () {
             package: 'Give - Paymill',
             domain: 'give-paymill', //textdomain
             destFile: 'give-paymill.pot',
-            bugReport: 'https://github.com/WordImpress/Give-Paymill',
+            bugReport: 'https://github.com/impress-org/give-paymill',
             lastTranslator: '',
-            team: 'WordImpress <info@wordimpress.com>'
+            team: 'GiveWP <info@givewp.com>'
         }))
         .pipe(gulp.dest('languages'));
 });

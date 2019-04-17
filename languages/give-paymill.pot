@@ -1,144 +1,145 @@
-# Copyright (C) 2016 Give - Paymill
+# Copyright (C) 2019 Give - Paymill
 # This file is distributed under the same license as the Give - Paymill package.
 msgid ""
 msgstr ""
 "Project-Id-Version: Give - Paymill\n"
-"Report-Msgid-Bugs-To: https://github.com/WordImpress/Give-Paymill\n"
+"Report-Msgid-Bugs-To: https://github.com/impress-org/give-paymill\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"PO-Revision-Date: 2016-MO-DA HO:MI+ZONE\n"
-"Language-Team: WordImpress <info@wordimpress.com>\n"
+"PO-Revision-Date: 2019-MO-DA HO:MI+ZONE\n"
+"Language-Team: GiveWP <info@givewp.com>\n"
 "X-Poedit-Basepath: ..\n"
 "X-Poedit-SourceCharset: UTF-8\n"
 "X-Poedit-KeywordsList: __;_e;_n:1,2;_x:1,2c;_ex:1,2c;_nx:4c,1,2;esc_attr__;esc_attr_e;esc_attr_x:1,2c;esc_html__;esc_html_e;esc_html_x:1,2c;_n_noop:1,2;_nx_noop:3c,1,2;__ngettext_noop:1,2\n"
 "X-Poedit-SearchPath-0: .\n"
 "X-Poedit-SearchPathExcluded-0: *.js\n"
 "Plural-Forms: nplurals=2; plural=(n != 1);\n"
-#: give-paymill.php:173
+
+#: give-paymill.php:93
 msgid "Missing token. Please contact support."
 msgstr ""
 
-#: give-paymill.php:345
+#: give-paymill.php:181
 msgid "Merchant Error: %s"
 msgstr ""
 
-#: give-paymill.php:441
+#: give-paymill.php:229
 msgid "Customer Creation Failed"
 msgstr ""
 
-#: give-paymill.php:441
+#: give-paymill.php:229
 msgid "Customer creation failed while processing a payment. Payment Data: %s"
 msgstr ""
 
-#: give-paymill.php:477, give-paymill.php:495
+#: give-paymill.php:247, give-paymill.php:255
 msgid "Paymill Error"
 msgstr ""
 
-#: give-paymill.php:477
+#: give-paymill.php:247
 msgid "Payment creation failed or payment not verified. Details: %s"
 msgstr ""
 
-#: give-paymill.php:479
+#: give-paymill.php:248
 msgid "Your payment could not be recorded, please contact the site administrator."
 msgstr ""
 
-#: give-paymill.php:495
+#: give-paymill.php:255
 msgid "There was an error encountered while processing the payment. Details: %s"
 msgstr ""
 
-#: give-paymill.php:497
+#: give-paymill.php:256
 msgid "There was an error processing your payment, please ensure you have entered your card number correctly."
 msgstr ""
 
-#: give-paymill.php:657, give-paymill.php:705, give-paymill.php:1409
+#: give-paymill.php:339, give-paymill.php:363, give-paymill.php:698
 msgid "Paymill only permits yearly, monthly, and weekly plans."
 msgstr ""
 
-#: give-paymill.php:657, give-paymill.php:665, give-paymill.php:705, give-paymill.php:713, give-paymill.php:817, give-paymill.php:1091
+#: give-paymill.php:339, give-paymill.php:343, give-paymill.php:363, give-paymill.php:367, give-paymill.php:418, give-paymill.php:538
 msgid "Error"
 msgstr ""
 
-#: give-paymill.php:665, give-paymill.php:713, give-paymill.php:1407
+#: give-paymill.php:343, give-paymill.php:367, give-paymill.php:697
 msgid "Paymill requires that the Times option be set to 0."
 msgstr ""
 
-#: give-paymill.php:817
+#: give-paymill.php:418
 msgid "There was an error creating a payment plan with Paymill."
 msgstr ""
 
-#: give-paymill.php:979
+#: give-paymill.php:482
 msgid "Cancel your subscription"
 msgstr ""
 
-#: give-paymill.php:981
+#: give-paymill.php:483
 msgid "Cancel Subscription"
 msgstr ""
 
-#: give-paymill.php:987
+#: give-paymill.php:486
 msgid "Do you really want to cancel your subscription?"
 msgstr ""
 
-#: includes/admin/give-paymill-activation.php:95
+#: includes/admin/give-paymill-activation.php:75
 msgid "Paymill Gateway"
 msgstr ""
 
-#: includes/admin/give-paymill-activation.php:139
-msgid "<strong>Activation Error:</strong> We noticed Give is not active. Please activate Give in order to use the Paymill Gateway."
+#: includes/admin/give-paymill-activation.php:98
+msgid "<strong>Activation Error:</strong> You must have the <a href=\"https://givewp.com/\" target=\"_blank\">Give</a> plugin installed and activated for the Paymill add-on to activate."
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:55
-msgid "Paymill"
+#: includes/admin/give-paymill-activation.php:107
+msgid "<strong>Activation Error:</strong> You must have <a href=\"%s\" target=\"_blank\">Give</a> version %s+ for the Paymill add-on to activate."
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:57
-msgid "Credit Card"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:101
-msgid "Paymill Settings"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:113
-msgid "Live Private Key"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:115
-msgid "Enter your live API key, found in your Paymill Account Settings."
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:127
-msgid "Live Public Key"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:129
-msgid "Enter your live public API key, found in your Paymill Account Settings."
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:139
-msgid "Test Private Key"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:141
-msgid "Enter your test API key, found in your Paymill Account Settings."
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:151
-msgid "Test Public Key"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:153
-msgid "Enter your test public API key, found in your Paymill Account Settings."
-msgstr ""
-
-#: includes/admin/plugins.php:59
+#: includes/admin/give-paymill-activation.php:125
 msgid "Settings"
 msgstr ""
 
-#: includes/admin/plugins.php:127
+#: includes/admin/give-paymill-activation.php:159
 msgid "Documentation"
 msgstr ""
 
-#: includes/admin/plugins.php:147
+#: includes/admin/give-paymill-activation.php:169
 msgid "Add-ons"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:28, includes/admin/give-paymill-admin.php:51
+msgid "Paymill"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:29
+msgid "Credit Card"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:57
+msgid "Live Private Key"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:58
+msgid "Enter your live API key, found in your Paymill Account Settings."
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:64
+msgid "Live Public Key"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:65
+msgid "Enter your live public API key, found in your Paymill Account Settings."
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:70
+msgid "Test Private Key"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:71
+msgid "Enter your test API key, found in your Paymill Account Settings."
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:76
+msgid "Test Public Key"
+msgstr ""
+
+#: includes/admin/give-paymill-admin.php:77
+msgid "Enter your test public API key, found in your Paymill Account Settings."
 msgstr ""

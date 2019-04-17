@@ -1,8 +1,8 @@
 === Give - Paymill Gateway ===
-Contributors: wordimpress, dlocc, webdevmattcrom, mordauk, ramiy
+Contributors: givewp, dlocc, webdevmattcrom
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
-Requires at least: 4.2
-Tested up to: 4.7
+Requires at least: 4.8
+Tested up to: 5.2
 Stable tag: 1.1
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
@@ -17,8 +17,8 @@ This plugin requires the Give plugin activated to function properly. When activa
 
 = Minimum Requirements =
 
-* WordPress 4.2 or greater
-* PHP version 5.3 or greater
+* WordPress 4.8 or greater
+* PHP version 5.6 or greater
 * MySQL version 5.0 or greater
 * Some payment gateways require fsockopen support (for IPN access)
 
@@ -39,8 +39,12 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 == Changelog ==
 
+= 1.1.1: April 16th, 2019 =
+* Fix: Resolved issue with JS path not properly being loaded resulting in a 404 for the script.
+* Tweak: Updated plugin author and name to GiveWP throughout.
+
 = 1.1 =
-* New: Support for Recurring Donations Add-on - https://github.com/WordImpress/Give-Paymill/issues/12
+* New: Support for Recurring Donations Add-on - https://github.com/impress-org/give-paymill/issues/12
 * New: The plugin now checks to see if Give is active and up to the minimum version required to run the plugin.
 
 = 1.0.2 =
