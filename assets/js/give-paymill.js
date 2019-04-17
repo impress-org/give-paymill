@@ -6,7 +6,7 @@ jQuery( document ).ready( function ( $ ) {
 
 	var this_form;
 
-	// non ajaxed
+	// non AJAX
 	$( 'body' ).on( 'submit', '.give-form', function ( event ) {
 
 		this_form = $( this );

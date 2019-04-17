@@ -80,6 +80,14 @@ msgstr ""
 msgid "Do you really want to cancel your subscription?"
 msgstr ""
 
+#: give-paymill.php:735, includes/admin/give-paymill-admin.php:120
+msgid "Paymill"
+msgstr ""
+
+#: give-paymill.php:736
+msgid "Credit Card"
+msgstr ""
+
 #: includes/admin/give-paymill-activation.php:75
 msgid "Paymill Gateway"
 msgstr ""
@@ -104,42 +112,34 @@ msgstr ""
 msgid "Add-ons"
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:28, includes/admin/give-paymill-admin.php:51
-msgid "Paymill"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:29
-msgid "Credit Card"
-msgstr ""
-
-#: includes/admin/give-paymill-admin.php:57
+#: includes/admin/give-paymill-admin.php:71
 msgid "Live Private Key"
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:58
+#: includes/admin/give-paymill-admin.php:72
 msgid "Enter your live API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:64
+#: includes/admin/give-paymill-admin.php:78
 msgid "Live Public Key"
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:65
+#: includes/admin/give-paymill-admin.php:79
 msgid "Enter your live public API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:70
+#: includes/admin/give-paymill-admin.php:84
 msgid "Test Private Key"
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:71
+#: includes/admin/give-paymill-admin.php:85
 msgid "Enter your test API key, found in your Paymill Account Settings."
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:76
+#: includes/admin/give-paymill-admin.php:90
 msgid "Test Public Key"
 msgstr ""
 
-#: includes/admin/give-paymill-admin.php:77
+#: includes/admin/give-paymill-admin.php:91
 msgid "Enter your test public API key, found in your Paymill Account Settings."
 msgstr ""
