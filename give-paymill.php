@@ -646,16 +646,6 @@ add_action( 'init', 'give_paymill_event_listener' );
  * Enqueue the scripts to the frontend of the website
  */
 function give_paymill_js() {
-	$give_options = give_get_settings();
-
-	$publishable_key = null;
-
-	if ( give_is_test_mode() ) {
-		$publishable_key = isset( $give_options['paymill_test_public_key'] ) ? trim( $give_options['paymill_test_public_key'] ) : '';
-	} else {
-		$publishable_key = isset( $give_options['paymill_live_public_key'] ) ? trim( $give_options['paymill_live_public_key'] ) : '';
-	}
-
 	wp_enqueue_script( 'paymill-js', 'https://bridge.paymill.com', array( 'jquery' ) );
 	wp_enqueue_script( 'give-paymill-js', GIVE_PAYMILL_PLUGIN_URL . 'assets/js/give-paymill.js', array(
 		'jquery',
@@ -667,7 +657,6 @@ function give_paymill_js() {
 	);
 
 	wp_localize_script( 'give-paymill-js', 'give_paymill_vars', $paymill_vars );
-
 }
 
 add_action( 'wp_enqueue_scripts', 'give_paymill_js', 100 );
