@@ -3,7 +3,8 @@ Contributors: givewp, dlocc, webdevmattcrom
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 4.8
 Tested up to: 5.2
-Stable tag: 1.1.0
+Stable tag: 1.1.1
+Requires Give: 2.4.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
