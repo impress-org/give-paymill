@@ -20,7 +20,7 @@ if ( ! defined( 'GIVE_PAYMILL_VERSION' ) ) {
 	define( 'GIVE_PAYMILL_VERSION', '1.1.1' );
 }
 if ( ! defined( 'GIVE_PAYMILL_MIN_GIVE_VERSION' ) ) {
-	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '2.4.0' );
+	define( 'GIVE_PAYMILL_MIN_GIVE_VERSION', '2.6.0' );
 }
 if ( ! defined( 'GIVE_PAYMILL_PLUGIN_DIR' ) ) {
 	define( 'GIVE_PAYMILL_PLUGIN_DIR', dirname( __FILE__ ) );

@@ -2,9 +2,9 @@
 Contributors: givewp, dlocc, webdevmattcrom
 Tags: donations, donation, ecommerce, e-commerce, fundraising, fundraiser, paymill, gateway
 Requires at least: 4.8
-Tested up to: 5.2
+Tested up to: 5.4
 Stable tag: 1.1.1
-Requires Give: 2.4.0
+Requires Give: 2.6.0
 License: GPLv3
 License URI: https://opensource.org/licenses/GPL-3.0
 
@@ -39,6 +39,9 @@ Automatic updates should work like a charm; as always though, ensure you backup 
 
 
 == Changelog ==
+
+= 1.1.1: June 16th, 2020 =
+* Fix: Resolved conflicts with Recurring Donations when configuring your donation form settings.
 
 = 1.1.0: April 16th, 2019 =
 * Maintenance: Updated Settings class to be compatible with the upcoming 2.5.0 Give Core version release.
